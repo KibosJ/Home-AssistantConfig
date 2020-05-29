@@ -4,6 +4,8 @@
 !*.yaml
 !.gitignore
 !*.md
+!screenshots/
+!screenshots/*.png
 
 # Ignore folders.
 .storage
