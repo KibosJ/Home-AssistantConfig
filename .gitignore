@@ -6,6 +6,7 @@
 !*.md
 !screenshots/
 !screenshots/*.png
+!.HA_VERSION
 
 # Ignore folders.
 .storage
