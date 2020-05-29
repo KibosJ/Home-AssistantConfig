@@ -1,0 +1,77 @@
+sensor.met_office_feels_like_temperature:
+  friendly_name: Feels Like Temperature
+  icon: mdi:thermometer-lines
+sensor.met_office_humidity:
+  friendly_name: Humidity
+sensor.met_office_probability_of_precipitation:
+  friendly_name: Probability of Precipitation
+  icon: mdi:water
+sensor.met_office_temperature:
+  friendly_name: Temperature
+sensor.met_office_uv:
+  friendly_name: UV
+sensor.met_office_visibility:
+  friendly_name: Visibility
+sensor.met_office_visibility_distance:
+  friendly_name: Visibility Distance
+sensor.met_office_weather:
+  friendly_name: Weather Conditions
+sensor.met_office_wind_direction:
+  friendly_name: Wind Direction
+sensor.met_office_wind_speed:
+  friendly_name: Wind Speed
+  icon: mdi:weather-windy
+sensor.met_office_wind_gust:
+  friendly_name: Wind Gust
+  icon: mdi:weather-windy-variant
+script.1554398539474:
+  icon: mdi:pause
+script.1554400810830:
+  icon: mdi:play
+media_player.nvidia_shield:
+  icon: mdi:android
+media_player.bedroom_dot:
+  icon: mdi:amazon-alexa
+media_player.living_room_dot:
+  icon: mdi:amazon-alexa
+sensor.sab_status:
+  icon: mdi:download
+sensor.sab_monthly_total:
+  friendly_name: Monthly Total
+  icon: mdi:calendar-week-begin
+sensor.sab_speed:
+  friendly_name: Speed
+  icon: mdi:speedometer
+sensor.sab_daily_total:
+  friendly_name: Daily Total
+  icon: mdi:calendar-today
+sensor.sab_weekly_total:
+  friendly_name: Weekly Total
+  icon: mdi:calendar-range
+sensor.sab_total:
+  friendly_name: Total Downloaded
+  icon: mdi:calendar-text
+media_player.kodi_android_local:
+  icon: mdi:kodi
+script.1555190783894:
+  icon: mdi:desktop-classic
+sensor.qbittorrent_down_speed:
+  friendly_name: qBT Down Speed
+  icon: mdi:download
+sensor.qbittorrent_up_speed:
+  friendly_name: qBT Up Speed
+  icon: mdi:upload
+sensor.qbittorrent_status:
+  friendly_name: qBT Status
+script.1555151958851:
+  icon: mdi:play-pause
+script.1555777638942:
+  icon: mdi:power-standby
+zone.work_shildon:
+  radius: 100
+sensor.rubbish_collection:
+  icon: mdi:delete-empty
+sensor.recycling_collection:
+  icon: mdi:recycle
+sensor.garden_waste_collection:
+  icon: mdi:tree

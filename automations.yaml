@@ -1,0 +1,87 @@
+- id: '1579025080428'
+  alias: Dim the lights
+  description: ''
+  trigger:
+  - entity_id: media_player.living_room
+    from: paused
+    platform: state
+    to: playing
+  condition:
+  - after: sunset
+    condition: sun
+  action:
+  - alias: ''
+    data:
+      brightness: 136
+      entity_id: light.living_room
+      rgb_color:
+      - 255
+      - 216
+      - 133
+      transition: 4
+    entity_id: light.living_room
+    service: light.turn_on
+- id: '1579025634569'
+  alias: Brighten lights
+  description: ''
+  trigger:
+  - entity_id: media_player.living_room
+    from: playing
+    platform: state
+    to: paused
+  condition:
+  - after: sunset
+    condition: sun
+  - after: '19:00:00'
+    condition: time
+  action:
+  - data:
+      brightness_pct: 100
+      rgb_color:
+      - 255
+      - 216
+      - 133
+      transition: 4
+    entity_id: light.living_room
+    service: light.turn_on
+- id: '1579110396845'
+  alias: Dim the lights from idle
+  description: ''
+  trigger:
+  - entity_id: media_player.living_room
+    from: idle
+    platform: state
+    to: playing
+  condition:
+  - after: sunset
+    condition: sun
+  - after: '19:00:00'
+    condition: time
+  action:
+  - data:
+      brightness_pct: 50
+      entity_id: light.living_room
+      rgb_color:
+      - 255
+      - 216
+      - 133
+      transition: 4
+    entity_id: light.living_room
+    service: light.turn_on
+- id: '1579973475492'
+  alias: Bedtime lights on
+  description: ''
+  trigger:
+  - entity_id: media_player.sony_bravia_tv
+    for: 00:00:6
+    from: 'on'
+    platform: state
+    to: 'off'
+  condition:
+  - after: '21:30:00'
+    condition: time
+  action:
+  - data:
+      brightness_pct: 100
+    entity_id: light.landing
+    service: light.turn_on

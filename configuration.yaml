@@ -1,0 +1,86 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  # Location required to calculate the time the sun rises and sets
+  latitude: !secret latitude_home
+  longitude: !secret longitude_home
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: 108
+  # metric for Metric, imperial for Imperial
+  unit_system: metric
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: Europe/London
+  # Customization file
+  customize: !include customize.yaml
+  external_url: !secret external_url
+  internal_url: !secret internal_url
+
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+
+# Show the introduction message on startup.
+#introduction:
+
+http:
+
+# Discover some devices automatically
+discovery:
+  enable:
+
+# frontend config
+frontend:
+  themes: !include_dir_merge_named themes
+  javascript_version: latest
+
+#Components
+sabnzbd:
+  api_key: !secret sab_api
+  host: 192.168.1.122
+  name: sab
+  port: 32768
+  ssl: false
+  sensors:
+    - current_status
+    - speed
+    - queue_size
+    - queue_remaining
+    - queue_count
+    - day_size
+    - week_size
+    - month_size
+    - total_size
+
+# Wake on LAN
+wake_on_lan:
+
+# Weather
+weather:
+  - platform: openweathermap
+    api_key: !secret openweather_api
+    mode: freedaily
+
+# HTML5 notifications
+notify:
+  - platform: html5
+    name: browser
+    vapid_pub_key: !secret vapid_pub_key
+    vapid_prv_key: !secret vapid_prv_key
+    vapid_email: !secret email
+
+# Spotify
+spotify:
+  client_id: !secret spotify_client_id
+  client_secret: !secret spotify_client_secret
+
+# Zones
+zone:
+  name: Home
+  latitude: !secret latitude_home
+  longitude: !secret longitude_home
+  radius: 50
+  icon: mdi:home
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+sensor: !include sensors.yaml

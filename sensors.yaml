@@ -1,0 +1,76 @@
+# Media
+- platform: sonarr
+  host: 192.168.1.122
+  port: 32560
+  api_key: !secret sonarr_api
+  monitored_conditions:
+    - upcoming
+  days: 7
+
+- platform: radarr
+  host: 192.168.1.122
+  port: 32559
+  api_key: !secret radarr_api
+  monitored_conditions:
+    - upcoming
+  days: 30
+
+- platform: rest
+  name: SkyQ living room
+  resource: http://192.168.1.117:9006/as/system/information
+  json_attributes:
+    - systemUptime
+    - activeStandby
+  device_class: power
+  value_template: "{% if (value_json.activeStandby == False) %}on{% else %}off{% endif %}"
+
+# Weather
+- platform: climacell
+  api_key: !secret cc_api
+  name: cc
+  latitude: !secret latitude_home
+  longitude: !secret longitude_home
+  monitored_conditions:
+    realtime:
+      - pollen_tree
+      - pollen_weed
+      - pollen_grass
+  scan_interval:
+    days: 0
+    hours: 1
+    minutes: 0
+    seconds: 0
+    milliseconds: 0
+
+- platform: metoffice
+  api_key: !secret metofficeapi
+  monitored_conditions:
+    - weather
+    - temperature
+    - feels_like_temperature
+    - wind_speed
+    - wind_direction
+    - wind_gust
+    - visibility
+    - visibility_distance
+    - uv
+    - precipitation
+    - humidity
+
+# Rubbish collection
+- platform: command_line
+  name: Rubbish collection
+  scan_interval: 10800
+  command: !secret rubbish_command
+
+# Recycling collection
+- platform: command_line
+  name: Recycling collection
+  scan_interval: 10800
+  command: !secret recycling_command
+
+# Garden waste collection
+- platform: command_line
+  name: Garden waste collection
+  scan_interval: 10800
+  command: !secret garden_command
