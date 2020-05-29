@@ -27,14 +27,14 @@ Docker version 17.09.1-ce, build 0bbe3ac
         hostname: home-assistant
         network_mode: host
         depends_on:
-    	    - letsencrypt
-    	environment:
-    		- TZ=Europe/London
-    	volumes:
-    		- /share/Docker/home-assistant/config:/config
-    	ports:
-    		- 32561:8123
-    	restart: always
+    	   - letsencrypt
+        environment:
+    	   - TZ=Europe/London
+        volumes:
+    	   - /share/Docker/home-assistant/config:/config
+        ports:
+    	   - 32561:8123
+        restart: always
 
 ## Other Docker Services
 
