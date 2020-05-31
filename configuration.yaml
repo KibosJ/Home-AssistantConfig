@@ -80,6 +80,13 @@ zone:
   radius: 50
   icon: mdi:home
 
+# Debug logs
+#logger:
+#  default: critical
+#  logs:
+#    pyatv: debug
+#    custom_components.apple_tv: debug
+
 group: !include groups.yaml
 automation: !include automations.yaml
 script: !include scripts.yaml

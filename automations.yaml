@@ -2,13 +2,16 @@
   alias: Dim the lights
   description: ''
   trigger:
-  - entity_id: media_player.living_room
+  - entity_id: media_player.living_room_atv
     from: paused
     platform: state
     to: playing
   condition:
   - after: sunset
     condition: sun
+  - condition: state
+    entity_id: light.living_room
+    state: 'on'
   action:
   - alias: ''
     data:
@@ -32,8 +35,9 @@
   condition:
   - after: sunset
     condition: sun
-  - after: '19:00:00'
-    condition: time
+  - condition: state
+    entity_id: light.living_room
+    state: 'on'
   action:
   - data:
       brightness_pct: 100
@@ -55,8 +59,9 @@
   condition:
   - after: sunset
     condition: sun
-  - after: '19:00:00'
-    condition: time
+  - condition: state
+    entity_id: light.living_room
+    state: 'on'
   action:
   - data:
       brightness_pct: 50
@@ -67,21 +72,4 @@
       - 133
       transition: 4
     entity_id: light.living_room
-    service: light.turn_on
-- id: '1579973475492'
-  alias: Bedtime lights on
-  description: ''
-  trigger:
-  - entity_id: media_player.sony_bravia_tv
-    for: 00:00:6
-    from: 'on'
-    platform: state
-    to: 'off'
-  condition:
-  - after: '21:30:00'
-    condition: time
-  action:
-  - data:
-      brightness_pct: 100
-    entity_id: light.landing
     service: light.turn_on
