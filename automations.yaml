@@ -73,3 +73,51 @@
       transition: 4
     entity_id: light.living_room
     service: light.turn_on
+- id: '1591477324212'
+  alias: Rubbish bin notification
+  description: Sends a notification to alexa for rubbish bins to be collected tomorrow
+  trigger:
+  - at: '19:00:00'
+    platform: time
+  condition:
+  - condition: state
+    entity_id: sensor.rubbish_date
+    state: tomorrow
+  action:
+  - data:
+      data:
+        type: tts
+      message: Rubbish is collected tomorrow
+    service: notify.alexa_media_living_room_dot
+- id: '1591477396917'
+  alias: Recycling bin notification
+  description: ''
+  trigger:
+  - at: '19:00:00'
+    platform: time
+  condition:
+  - condition: state
+    entity_id: sensor.recycling_date
+    state: tomorrow
+  action:
+  - data:
+      data:
+        type: tts
+      message: Recycling is collected tomorrow
+    service: notify.alexa_media_living_room_dot
+- id: '1591477662742'
+  alias: Garden bin notification
+  description: ''
+  trigger:
+  - at: '19:00:00'
+    platform: time
+  condition:
+  - condition: state
+    entity_id: sensor.garden_date
+    state: tomorrow
+  action:
+  - data:
+      data:
+        type: tts
+      message: Garden waste is collected tomorrow
+    service: notify.alexa_media_living_room_dot

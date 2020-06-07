@@ -74,3 +74,22 @@
   name: Garden waste collection
   scan_interval: 10800
   command: !secret garden_command
+
+# Rubbish date extract
+- platform: command_line
+  name: Rubbish date
+  scan_interval: 10800
+  command: !secret rubbish_date
+
+# Recycling date extract
+- platform: command_line
+  name: Recycling date
+  scan_interval: 10800
+  command: !secret recycling_date
+
+# Garden waste date extract
+- platform: command_line
+  name: Garden date
+  scan_interval: 10800
+  command: !secret garden_date
+
