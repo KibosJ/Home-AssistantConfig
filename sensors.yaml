@@ -17,7 +17,7 @@
 
 - platform: rest
   name: SkyQ living room
-  resource: http://192.168.1.117:9006/as/system/information
+  resource: http://192.168.1.163:9006/as/system/information
   json_attributes:
     - systemUptime
     - activeStandby
