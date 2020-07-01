@@ -27,6 +27,21 @@ http:
 discovery:
   enable:
 
+# Dyson configuration
+dyson:
+  username: !secret email
+  password: !secret dyson_p
+  language: GB
+  devices:
+    - device_id: !secret dyson_s
+      device_ip: 192.168.1.16
+
+# Hue configuration
+hue:
+  bridges:
+    - host: 192.168.1.42
+      allow_hue_groups: true
+
 # frontend config
 frontend:
   themes: !include_dir_merge_named themes
@@ -35,10 +50,10 @@ frontend:
 #Components
 sabnzbd:
   api_key: !secret sab_api
-  host: 192.168.1.122
+  host: !secret sab_host
   name: sab
-  port: 32768
-  ssl: false
+  port: 443
+  ssl: true
   sensors:
     - current_status
     - speed
