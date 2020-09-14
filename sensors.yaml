@@ -8,38 +8,20 @@
   device_class: power
   value_template: "{% if (value_json.activeStandby == False) %}on{% else %}off{% endif %}"
 
-# Weather
-#- platform: climacell
-#  api_key: !secret cc_api
-#  name: cc
-#  latitude: !secret latitude_home
-#  longitude: !secret longitude_home
+#- platform: metoffice
+#  api_key: !secret metofficeapi
 #  monitored_conditions:
-#    realtime:
-#      - pollen_tree
-#      - pollen_weed
-#      - pollen_grass
-#  scan_interval:
-#    days: 0
-#    hours: 1
-#    minutes: 0
-#    seconds: 0
-#    milliseconds: 0
-
-- platform: metoffice
-  api_key: !secret metofficeapi
-  monitored_conditions:
-    - weather
-    - temperature
-    - feels_like_temperature
-    - wind_speed
-    - wind_direction
-    - wind_gust
-    - visibility
-    - visibility_distance
-    - uv
-    - precipitation
-    - humidity
+#    - weather
+#    - temperature
+#    - feels_like_temperature
+#    - wind_speed
+#    - wind_direction
+#    - wind_gust
+#    - visibility
+#    - visibility_distance
+#    - uv
+#    - precipitation
+#    - humidity
 
 # Rubbish collection
 - platform: command_line

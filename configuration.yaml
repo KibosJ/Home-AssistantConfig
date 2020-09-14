@@ -36,11 +36,9 @@ dyson:
     - device_id: !secret dyson_s
       device_ip: 192.168.1.16
 
-# Hue configuration
-hue:
-  bridges:
-    - host: 192.168.1.42
-      allow_hue_groups: true
+# Alexa configuration
+alexa:
+  smart_home:
 
 # frontend config
 frontend:
@@ -86,6 +84,10 @@ notify:
 spotify:
   client_id: !secret spotify_client_id
   client_secret: !secret spotify_client_secret
+
+spotcast:
+  sp_dc: !secret sp_dc
+  sp_key: !secret sp_key
 
 # Zones
 zone:

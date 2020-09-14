@@ -1,17 +1,17 @@
-'scr_pause_downloads':
+scr_pause_downloads:
   alias: Pause Downloads
   icon: mdi:pause-circle
   sequence:
   - alias: ''
     data: {}
     service: sabnzbd.pause
-'scr_resume_downloads':
+scr_resume_downloads:
   alias: Resume downloads
   icon: mdi:play-circle
   sequence:
   - data: {}
     service: sabnzbd.resume
-'scr_sab_status':
+scr_sab_status:
   alias: Sab Status
   sequence:
   - data:
@@ -21,42 +21,14 @@
       target:
       - Living Room Dot
     service: notify.alexa_media
-'scr_pause_atv':
+scr_pause_atv:
   alias: Pause Apple TV
   sequence:
   - data:
       entity_id: media_player.apple_tv
     entity_id: media_player.living_room
     service: media_player.media_play_pause
-# Grocy scripts
-'scr_consume_coke':
-  alias: Consume Coke Zero can
-  icon: mdi:cup-water
-  sequence:
-  - data:
-      amount: 1
-      product_id: 8
-      spoiled: false
-      transaction_type: CONSUME
-    service: grocy.consume_product
-  - data:
-      message: Coke zero can consumed
-    service: notify.mobile_app_kitchen_ipad
-'scr_consume_pepsi':
-  alias: Consume Pepsi Max can
-  icon: mdi:cup-water
-  sequence:
-  - data:
-      amount: 1
-      product_id: 7
-      spoiled: false
-      transaction_type: CONSUME
-    service: grocy.consume_product
-  - data:
-      message: Pepsi Max can consumed
-    service: notify.mobile_app_kitchen_ipad
-# Hue scripts
-'scr_lr_day':
+scr_lr_day:
   alias: Daylight
   icon: mdi:brightness-7
   sequence:
@@ -64,7 +36,7 @@
       group_name: Living room
       scene_name: LR Daylight
     service: hue.hue_activate_scene
-'scr_lr_concentrate':
+scr_lr_concentrate:
   alias: Living room (Concentrate)
   icon: mdi:bullseye
   sequence:
@@ -72,4 +44,25 @@
       group_name: Living room
       scene_name: Concentrate
     service: hue.hue_activate_scene
-
+scr_toggle_fan_nm:
+  alias: Toggle bedroom fan night mode
+  mode: single
+  sequence:
+  - data:
+      entity_id: fan.bedroom
+    data_template:
+      night_mode: "{% if is_state_attr('fan.bedroom', 'night_mode', false) %}\n  true\n\
+        {% else %}\n  false\n{% endif %}\n"
+    service: dyson.set_night_mode
+  icon: mdi:moon-waning-crescent
+scr_toggle_fan_auto:
+  alias: Toggle bedroom fan auto mode
+  mode: single
+  sequence:
+  - data:
+      entity_id: fan.bedroom
+    data_template:
+      night_mode: "{% if is_state_attr('fan.bedroom', 'auto_mode', false) %}\n  true\n\
+        {% else %}\n  false\n{% endif %}\n"
+    service: dyson.set_auto_mode
+  icon: mdi:arrow-decision-auto
