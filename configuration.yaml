@@ -1,51 +1,67 @@
 homeassistant:
-  # Name of the location where Home Assistant is running
   name: Home
-  # Location required to calculate the time the sun rises and sets
   latitude: !secret latitude_home
   longitude: !secret longitude_home
-  # Impacts weather/sunrise data (altitude above sea level in meters)
   elevation: 108
-  # metric for Metric, imperial for Imperial
   unit_system: metric
-  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   time_zone: Europe/London
-  # Customization file
   customize: !include customize.yaml
   external_url: !secret external_url
   internal_url: !secret internal_url
+  media_dirs:
+    logos: /media/logos
 
-# Configure a default setup of Home Assistant (frontend, api, etc)
+# Load all default components
 default_config:
 
-# Show the introduction message on startup.
-#introduction:
+# Load themes directory
+frontend:
+  themes: !include_dir_merge_named themes
 
-http:
-
-# Discover some devices automatically
+# Automatic device discovery
 discovery:
   enable:
 
-# Dyson configuration
+# Enable BWAlarm integration
+alarm_control_panel: !include resources/bwalarm/bwalarm.yaml
+
+# Monitor Docker containers
+monitor_docker:
+  - name: Docker
+    monitored_conditions:
+      - allinone
+
+# Dyson Air Purifier
 dyson:
   username: !secret email
   password: !secret dyson_p
   language: GB
   devices:
     - device_id: !secret dyson_s
-      device_ip: 192.168.1.16
+      device_ip: 192.168.1.130
 
-# Alexa configuration
+# Enable Home Assistant API
+api:
+
+# Alexa
 alexa:
   smart_home:
+    locale: en-GB
+    endpoint: https://api.eu.amazonalexa.com/v3/events
+    client_id: !secret alexa_clientid
+    client_secret: !secret alexa_clientsecret
+    filter:
+      include_domains:
+        - script
+        - fan
+      exclude_domains:
+        - light
+        - camera
+        - automation
+        - media_player
+        - binary_sensor
 
-# frontend config
-frontend:
-  themes: !include_dir_merge_named themes
-  javascript_version: latest
-
-#Components
+# Sabnzbd
 sabnzbd:
   api_key: !secret sab_api
   host: !secret sab_host
@@ -66,12 +82,6 @@ sabnzbd:
 # Wake on LAN
 wake_on_lan:
 
-# Weather
-weather:
-  - platform: openweathermap
-    api_key: !secret openweather_api
-    mode: freedaily
-
 # HTML5 notifications
 notify:
   - platform: html5
@@ -79,15 +89,6 @@ notify:
     vapid_pub_key: !secret vapid_pub_key
     vapid_prv_key: !secret vapid_prv_key
     vapid_email: !secret email
-
-# Spotify
-spotify:
-  client_id: !secret spotify_client_id
-  client_secret: !secret spotify_client_secret
-
-spotcast:
-  sp_dc: !secret sp_dc
-  sp_key: !secret sp_key
 
 # Zones
 zone:
@@ -108,3 +109,4 @@ group: !include groups.yaml
 automation: !include automations.yaml
 script: !include scripts.yaml
 sensor: !include sensors.yaml
+binary_sensor: !include binary_sensors.yaml

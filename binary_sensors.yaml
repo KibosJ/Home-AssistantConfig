@@ -1,0 +1,28 @@
+# MQTT Sensors
+- platform: mqtt
+  state_topic: "shellies/shellydw2-D8BFC01A86F5/sensor/state"
+  name: Back Door Sensor
+  payload_on: "open"
+  payload_off: "close"
+  device_class: window
+
+- platform: mqtt
+  state_topic: "shellies/shellydw2-D8BFC01A86EF/sensor/state"
+  name: Front Door Sensor
+  payload_on: "open"
+  payload_off: "close"
+  device_class: window
+
+- platform: mqtt
+  state_topic: "shellies/shellydw2-D8BFC01A86F5/sensor/vibration"
+  name: Back Door Vibration
+  payload_on: "1"
+  payload_off: "0"
+  device_class: vibration
+
+- platform: mqtt
+  state_topic: "shellies/shellydw2-D8BFC01A86EF/sensor/vibration"
+  name: Front Door Vibration
+  payload_on: "1"
+  payload_off: "0"
+  device_class: vibration

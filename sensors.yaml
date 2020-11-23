@@ -1,61 +1,98 @@
-# Media
+# REST Sensors
 - platform: rest
-  name: SkyQ living room
-  resource: http://192.168.1.163:9006/as/system/information
+  name: Sky Q
+  resource: http://192.168.1.51:9006/as/system/information
   json_attributes:
     - systemUptime
     - activeStandby
   device_class: power
   value_template: "{% if (value_json.activeStandby == False) %}on{% else %}off{% endif %}"
 
-#- platform: metoffice
-#  api_key: !secret metofficeapi
-#  monitored_conditions:
-#    - weather
-#    - temperature
-#    - feels_like_temperature
-#    - wind_speed
-#    - wind_direction
-#    - wind_gust
-#    - visibility
-#    - visibility_distance
-#    - uv
-#    - precipitation
-#    - humidity
+- platform: rest
+  name: Sky Q Mini
+  resource: http://192.168.1.43:9006/as/system/information
+  json_attributes:
+    - systemUptime
+    - activeStandby
+  device_class: power
+  value_template: "{% if (value_json.activeStandby == False) %}on{% else %}off{% endif %}"
 
 # Rubbish collection
 - platform: command_line
   name: Rubbish collection
   scan_interval: 3600
-  command: '/config/scripts/rubbish.sh'
+  command: "/config/scripts/rubbish.sh"
 
 # Recycling collection
 - platform: command_line
   name: Recycling collection
   scan_interval: 3600
-  command: '/config/scripts/recycling.sh'
+  command: "/config/scripts/recycling.sh"
 
 # Garden waste collection
 - platform: command_line
   name: Garden waste collection
   scan_interval: 3600
-  command: '/config/scripts/garden.sh'
+  command: "/config/scripts/garden.sh"
 
 # Rubbish date extract
 - platform: command_line
   name: Rubbish date
   scan_interval: 3600
-  command: '/config/scripts/rubbish_date.sh'
+  command: "/config/scripts/rubbish_date.sh"
 
 # Recycling date extract
 - platform: command_line
   name: Recycling date
   scan_interval: 3600
-  command: '/config/scripts/recycling_date.sh'
+  command: "/config/scripts/recycling_date.sh"
 
 # Garden waste date extract
 - platform: command_line
   name: Garden date
   scan_interval: 3600
-  command: '/config/scripts/garden_date.sh'
+  command: "/config/scripts/garden_date.sh"
 
+# Template Sensors
+- platform: template
+  sensors:
+    atv_media:
+      friendly_name: "Apple TV Media"
+      value_template: "{{ state_attr('media_player.living_room_atv', 'media_artist') }} - {{state_attr('media_player.living_room_atv', 'media_title')}}"
+
+# MQTT Sensors
+- platform: mqtt
+  state_topic: "shellies/shellydw2-D8BFC01A86F5/sensor/lux"
+  name: Back Door Lux
+  device_class: illuminance
+  unit_of_measurement: 'lx'
+
+- platform: mqtt
+  state_topic: "shellies/shellydw2-D8BFC01A86EF/sensor/lux"
+  name: Front Door Lux
+  device_class: illuminance
+  unit_of_measurement: 'lx'
+
+- platform: mqtt
+  state_topic: "shellies/shellydw2-D8BFC01A86F5/sensor/temperature"
+  name: Back Door Temperature
+  device_class: temperature
+  unit_of_measurement: '°C'
+
+- platform: mqtt
+  state_topic: "shellies/shellydw2-D8BFC01A86EF/sensor/temperature"
+  name: Front Door Temperature
+  device_class: temperature
+  unit_of_measurement: '°C'
+
+- platform: mqtt
+  state_topic: "shellies/shellydw2-D8BFC01A86F5/sensor/battery"
+  name: Back Door Battery
+  device_class: battery
+  unit_of_measurement: '%'
+
+- platform: mqtt
+  state_topic: "shellies/shellydw2-D8BFC01A86EF/sensor/battery"
+  name: Front Door Battery
+  device_class: battery
+  unit_of_measurement: '%'

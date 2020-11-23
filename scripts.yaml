@@ -28,22 +28,6 @@ scr_pause_atv:
       entity_id: media_player.apple_tv
     entity_id: media_player.living_room
     service: media_player.media_play_pause
-scr_lr_day:
-  alias: Daylight
-  icon: mdi:brightness-7
-  sequence:
-  - data:
-      group_name: Living room
-      scene_name: LR Daylight
-    service: hue.hue_activate_scene
-scr_lr_concentrate:
-  alias: Living room (Concentrate)
-  icon: mdi:bullseye
-  sequence:
-  - data:
-      group_name: Living room
-      scene_name: Concentrate
-    service: hue.hue_activate_scene
 scr_toggle_fan_nm:
   alias: Toggle bedroom fan night mode
   mode: single
@@ -62,7 +46,7 @@ scr_toggle_fan_auto:
   - data:
       entity_id: fan.bedroom
     data_template:
-      night_mode: "{% if is_state_attr('fan.bedroom', 'auto_mode', false) %}\n  true\n\
+      auto_mode: "{% if is_state_attr('fan.bedroom', 'auto_mode', false) %}\n  true\n\
         {% else %}\n  false\n{% endif %}\n"
     service: dyson.set_auto_mode
   icon: mdi:arrow-decision-auto
